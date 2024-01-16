@@ -158,6 +158,7 @@ const Sidebar = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const [isFocused, setIsFocused] = useState(false);
+  const isDarkMode = theme.palette.mode === 'dark';
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -174,7 +175,7 @@ const Sidebar = () => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} sx={{backgroundColor:"#052d2f" }} >
+      <AppBar position="fixed" open={open} sx={{ backgroundColor: isDarkMode ? "#052d2f" : "#0a5a5e" }} >
         <Toolbar>
           <FlexBetween>
             <IconButton
@@ -210,11 +211,11 @@ const Sidebar = () => {
               {theme.palette.mode === "dark" ? (
                 <DarkModeOutlined sx={{ fontSize: "25px" }}  />
               ) : (
-                <LightModeOutlined sx={{ fontSize: "25px" }} />
+                <LightModeOutlined sx={{ fontSize: "25px", color: "#FFFFFF" }} />
               )}
             </IconButton>
             <IconButton>
-              <SettingsOutlined sx={{ fontSize: "25px" }} />
+              <SettingsOutlined sx={{ fontSize: "25px", color: theme.palette.mode === "dark" ? "#FFFFFF" : "#FFFFFF" }} />
             </IconButton>
           </FlexBetween>
         </Toolbar>
