@@ -2,7 +2,7 @@ import { CssBaseline, ThemeProvider} from "@mui/material";
 import { createTheme} from "@mui/material/styles";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes,Link } from "react-router-dom";
 import { themeSettings } from "./theme";
 import Layout from "./scenes/layout";
 import Dashboard from "./scenes/dashboard";
@@ -20,9 +20,17 @@ function App() {
         <ThemeProvider theme={theme}>
           <CssBaseline/> 
           <Routes>
-            <Route element={<Sidebar/> }>
-              <Route path="/" element={<Navigate to="/dashboard" replace/>}/>
+            
+            <Route >
+              <Route path="login" element={<Link to="/dashboard">login page</Link>}>
+              </Route>
+              <Route element={<Sidebar/> }>
+              <Route path="" element={<Navigate to="/home" replace/>}/>
               <Route path="/dashboard" element={<Dashboard/>}/>
+              <Route path="/dashboard1" element={<p>hello<br/> hjhjhj <br/></p>}/>
+              </Route>
+             
+              
             </Route>
           </Routes>
         </ThemeProvider>
