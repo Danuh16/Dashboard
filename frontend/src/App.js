@@ -1,37 +1,32 @@
-import { CssBaseline, ThemeProvider} from "@mui/material";
-import { createTheme} from "@mui/material/styles";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { BrowserRouter, Navigate, Route, Routes,Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { themeSettings } from "./theme";
-import Layout from "./scenes/layout";
 import Dashboard from "./scenes/dashboard";
-import Sidebar from "./components/Sidebar";
-
-
+//import Login from "./scenes/authentication/login";
+import Layout from "./scenes/layout";
 
 function App() {
   const mode = useSelector((state) => state.global.mode);
+  //const isAuthenticated = useSelector((state) => state.global.isAuthenticated);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
   return (
     <div className="App">
       <BrowserRouter>
         <ThemeProvider theme={theme}>
-          <CssBaseline/> 
+          <CssBaseline />
           <Routes>
-            
-            <Route >
-              <Route path="login" element={<Link to="/dashboard">login page</Link>}>
+            {/* {!isAuthenticated ? (
+              <Route path="/" element={<Login />} />
+            ) : ( */}
+              <Route element={<Layout />}>
+                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                <Route path="/dashboard" element={<Dashboard />} />
               </Route>
-              <Route element={<Sidebar/> }>
-              <Route path="" element={<Navigate to="/home" replace/>}/>
-              <Route path="/dashboard" element={<Dashboard/>}/>
-              <Route path="/dashboard1" element={<p>hello<br/> hjhjhj <br/></p>}/>
-              </Route>
-             
-              
-            </Route>
+            {/* )} */}
           </Routes>
         </ThemeProvider>
       </BrowserRouter>
