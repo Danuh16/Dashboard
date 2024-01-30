@@ -24,6 +24,10 @@ import {
   useTheme,
 } from "@mui/material";
 
+
+
+
+
 const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
@@ -32,6 +36,7 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
   const isOpen = Boolean(anchorEl);
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+  const [isFocused, setIsFocused] = useState(false);
 
   return (
     <AppBar
@@ -45,17 +50,35 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
         {/* LEFT SIDE */}
         <FlexBetween>
           <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-            <MenuIcon />
+            <MenuIcon
+              sx={{
+                color: theme.palette.mode === "dark" ? "#FFFFFF" : "#0A5A5E",
+              }}
+            />
           </IconButton>
           <FlexBetween
             backgroundColor={theme.palette.background.alt}
-            borderRadius="9px"
+            borderRadius="15px"
+            border={
+              isFocused
+                ? theme.palette.mode === "dark"
+                  ? "2px solid White"
+                  : "2px solid #0A5A5E"
+                : "none"
+            }
             gap="3rem"
             p="0.1rem 1.5rem"
+            color={theme.palette.secondary.main}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
           >
             <InputBase placeholder="Search..." />
             <IconButton>
-              <Search />
+              <Search
+                sx={{
+                  color: theme.palette.mode === "dark" ? "#FFFFFF" : "#0A5A5E",
+                }}
+              />
             </IconButton>
           </FlexBetween>
         </FlexBetween>
@@ -66,11 +89,16 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
             {theme.palette.mode === "dark" ? (
               <DarkModeOutlined sx={{ fontSize: "25px" }} />
             ) : (
-              <LightModeOutlined sx={{ fontSize: "35px", color: "#FFFFFF" }} />
+              <LightModeOutlined sx={{ fontSize: "25px", color: "#0A5A5E" }} />
             )}
           </IconButton>
           <IconButton>
-            <SettingsOutlined sx={{ fontSize: "25px",  color: theme.palette.mode === "dark" ? "#FFFFFF" : "#FFFFFF" }} />
+            <SettingsOutlined
+              sx={{
+                fontSize: "25px",
+                color: theme.palette.mode === "dark" ? "#FFFFFF" : "#0A5A5E",
+              }}
+            />
           </IconButton>
 
           <FlexBetween>
@@ -88,9 +116,14 @@ const Navbar = ({ user, isSidebarOpen, setIsSidebarOpen }) => {
                 component="img"
                 alt="profile"
                 src={profileImage}
-                height="32px"
-                width="32px"
+                height="40px"
+                width="40px"
                 borderRadius="50%"
+                border={
+                  theme.palette.mode === "dark"
+                    ? "2px solid White"
+                    : "2px solid #0A5A5E"
+                }
                 sx={{ objectFit: "cover" }}
               />
               <Box textAlign="left">
