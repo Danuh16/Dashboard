@@ -37,7 +37,6 @@ import profileImage from "../assets/hulu.jpg";
 
 
 
-
 const navItems = [
   {
     text: "Dashboard",
@@ -98,7 +97,6 @@ const navItems = [
 ];
 
 
-
 const Sidebar = ({
   user,
   drawerWidth,
@@ -131,6 +129,11 @@ const Sidebar = ({
               boxSixing: "border-box",
               borderWidth: isNonMobile ? 0 : "2px",
               width: drawerWidth,
+              scrollbarWidth: "hidden",
+              msOverflowStyle: "none",
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
             },
           }}
         >
@@ -144,6 +147,7 @@ const Sidebar = ({
                     src={profileImage}
                     height="50px"
                     width="50px"
+                    marginLeft="-15px"
                     borderRadius="50%"
                     border={
                       theme.palette.mode === "dark"
@@ -152,8 +156,8 @@ const Sidebar = ({
                     }
                     sx={{ objectFit: "cover" }}
                   />
-                  <Typography variant="h4" fontWeight="bold">
-                    HULU DASHBOARD
+                  <Typography variant="h4" fontWeight="bold" sx={{ whiteSpace: "nowrap" }}>
+                    HULU ORDER
                   </Typography>
                 </Box>
                 {!isNonMobile && (
